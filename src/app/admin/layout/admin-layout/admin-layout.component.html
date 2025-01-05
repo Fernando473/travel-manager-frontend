@@ -1,0 +1,14 @@
+<div class="admin-layout">
+  <mat-sidenav-container>
+    <mat-sidenav mode="side" opened>
+      <app-sidebar></app-sidebar>
+    </mat-sidenav>
+
+    <mat-sidenav-content>
+      <app-header></app-header>
+      <main class="main-content">
+        <router-outlet></router-outlet>
+      </main>
+    </mat-sidenav-content>
+  </mat-sidenav-container>
+</div>

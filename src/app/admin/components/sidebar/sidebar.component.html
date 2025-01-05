@@ -1,0 +1,23 @@
+<div class="sidebar">
+  <div class="logo">
+  </div>
+
+  <mat-nav-list>
+    <ng-container *ngIf="isExpenseRequester$ | async" >
+      <a mat-list-item routerLink="/admin/dashboard/create-expense" routerLinkActive="active" class="menu-item">
+        <span>Crear Solicitud</span>
+      </a>
+    </ng-container>
+
+    <ng-container *ngIf="isExpenseApprover$ | async" >
+      <a mat-list-item routerLink="/admin/dashboard/approve-expense" routerLinkActive="active" class="menu-item">
+        <span>Aprobar Solicitud</span>
+      </a>
+    </ng-container>
+    <mat-divider></mat-divider>
+    <a mat-list-item (click)="logout()" class="cerrar-sesion">
+      <mat-icon>exit_to_app</mat-icon>
+      <span>Cerrar Sesión</span>
+    </a>
+  </mat-nav-list>
+</div>

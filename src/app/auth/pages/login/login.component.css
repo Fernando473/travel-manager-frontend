@@ -1,10 +1,4 @@
-.main-container {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  min-height: 100vh;
-  background-color: #f5f5f5;
-}
+
 
 .login-card {
   background: white;
@@ -47,40 +41,10 @@ label {
 
   &:focus {
     outline: none;
-    border-color: #007bff;
+    border-color: var(--primary-color);
   }
 }
 
-.btn-login {
-  background-color: #007bff;
-  color: white;
-  padding: 0.8rem;
-  border: none;
-  border-radius: 5px;
-  font-size: 1rem;
-  cursor: pointer;
-  transition: background-color 0.3s;
-
-  &:hover {
-    background-color: #0056b3;
-  }
-}
-
-.register-link {
-  text-align: center;
-  margin-top: 1rem;
-  color: #666;
-
-  a {
-    color: #007bff;
-    text-decoration: none;
-    font-weight: 500;
-
-    &:hover {
-      text-decoration: underline;
-    }
-  }
-}
 
 input.example-right-align::-webkit-outer-spin-button,
 input.example-right-align::-webkit-inner-spin-button {
@@ -89,4 +53,8 @@ input.example-right-align::-webkit-inner-spin-button {
 
 input.example-right-align {
   -moz-appearance: textfield;
+}
+.main-container {
+  min-height: 100vh;
+  max-height: 100vh;
 }

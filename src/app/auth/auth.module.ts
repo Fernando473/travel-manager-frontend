@@ -13,7 +13,7 @@ import {MatCheckboxModule} from '@angular/material/checkbox';
 @NgModule({
   declarations: [
     RegisterPageComponent,
-    LoginComponent
+    LoginComponent,
   ],
   imports: [
     CommonModule,
@@ -22,7 +22,7 @@ import {MatCheckboxModule} from '@angular/material/checkbox';
     MatIconModule,
     MatInputModule,
     ReactiveFormsModule,
-    MatCheckboxModule
+    MatCheckboxModule,
   ]
 })
 export class AuthModule { }

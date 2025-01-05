@@ -1,0 +1,13 @@
+<mat-toolbar color="primary">
+  <span>Panel de Administración</span>
+  <span class="spacer"></span>
+  <button mat-icon-button [matMenuTriggerFor]="menu">
+    <mat-icon>account_circle</mat-icon>
+  </button>
+  <mat-menu #menu="matMenu">
+    <button mat-menu-item (click)="logout()">
+      <mat-icon>exit_to_app</mat-icon>
+      <span>Cerrar Sesión</span>
+    </button>
+  </mat-menu>
+</mat-toolbar>

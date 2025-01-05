@@ -1,29 +1,47 @@
-import { Component } from '@angular/core';
-import {FormControl, FormGroup, Validators, ValidatorFn, AbstractControl, ValidationErrors } from '@angular/forms';
+import { Component, inject } from '@angular/core';
+import {
+  FormControl,
+  FormGroup,
+  Validators,
+  ValidatorFn,
+  AbstractControl,
+  ValidationErrors,
+} from '@angular/forms';
+import { MatSnackBar } from '@angular/material/snack-bar';
+import { Router } from '@angular/router';
+import { RegisterForm } from '@app/auth/interfaces/register-form.interface';
+import AuthService from '@app/auth/services/login-service.service';
 
 @Component({
   selector: 'app-register-page',
   standalone: false,
 
   templateUrl: './register-page.component.html',
-  styleUrl: './register-page.component.css'
+  styleUrl: './register-page.component.css',
 })
 export class RegisterPageComponent {
+  private _snackBar = inject(MatSnackBar);
 
- public registerForm = new FormGroup({
-    identification: new FormControl('', [Validators.required]),
-    name: new FormControl('', [Validators.required]),
-    email: new FormControl('', [Validators.required, Validators.email]),
-    password: new FormControl('', [Validators.required]),
-    rePassword: new FormControl('', [Validators.required]),
-    expenseRequester: new FormControl(false),
-    expenseApprover: new FormControl(false),
-  }, {
-    validators: [
-      this.passwordMatchValidator(),
-      this.roleSelectionValidator()
-    ]
-  });
+
+  constructor(private authService: AuthService, private router: Router) {}
+
+  public registerForm = new FormGroup(
+    {
+      identification: new FormControl('', [Validators.required]),
+      name: new FormControl('', [Validators.required]),
+      email: new FormControl('', [Validators.required, Validators.email]),
+      password: new FormControl('', [Validators.required]),
+      rePassword: new FormControl('', [Validators.required]),
+      expenseRequester: new FormControl(false),
+      expenseApprover: new FormControl(false),
+    },
+    {
+      validators: [
+        this.passwordMatchValidator(),
+        this.roleSelectionValidator(),
+      ],
+    }
+  );
 
   private roleSelectionValidator(): ValidatorFn {
     return (formGroup: AbstractControl): ValidationErrors | null => {
@@ -46,7 +64,9 @@ export class RegisterPageComponent {
       return password === rePassword ? null : { passwordMismatch: true };
     };
   }
-
+  openSnackBar(message: string, action: string) {
+    this._snackBar.open(message, action);
+  }
   onRegister() {
     if (this.registerForm.valid) {
       const roles: string[] = [];
@@ -58,20 +78,24 @@ export class RegisterPageComponent {
       }
 
       const formValue = this.registerForm.value;
-      const registerData = {
-        identification: formValue.identification,
-        name: formValue.name,
-        email: formValue.email,
-        password: formValue.password,
-        rePassword: formValue.rePassword,
-        roles: roles
+      const registerData: RegisterForm = {
+        identification: formValue.identification!,
+        name: formValue.name!,
+        email: formValue.email!,
+        password: formValue.password!,
+        rePassword: formValue.rePassword!,
+        roles: roles,
       };
+      this.authService.register(registerData).subscribe({
+        next: () => {
+          this.openSnackBar('Registro exitoso', 'Cerrar');
 
-      // Enviar registerData al servicio
-      console.log(registerData);
+          console.log('Registro exitoso');
+        },
+        error: (error) => {
+          this.openSnackBar(error.error.message, 'Cerrar');
+        },
+      });
     }
   }
-
-
-
 }
