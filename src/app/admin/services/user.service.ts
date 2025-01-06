@@ -1,6 +1,7 @@
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { UserInfo } from '@app/auth/interfaces/user-info.interface';
+import AuthService from '@app/auth/services/login-service.service';
 import { environment } from '@env/environment';
 import { BehaviorSubject, map, Observable, tap } from 'rxjs';
 
@@ -12,10 +13,10 @@ export class UserService {
   private userRoles = new BehaviorSubject<string[]>([]);
   public userRoles$ = this.userRoles.asObservable();
 
-  constructor(private readonly http: HttpClient) { }
+  constructor(private readonly http: HttpClient, private authService: AuthService) { }
 
   getUserInfo(): Observable<UserInfo> {
-    const token = localStorage.getItem('token');
+    const token = this.authService.getToken();
     const headers = new HttpHeaders({
       'Authorization': `Bearer ${token}`
     });

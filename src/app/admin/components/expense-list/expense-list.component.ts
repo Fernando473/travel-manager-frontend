@@ -23,12 +23,14 @@ export class ExpenseListComponent {
     'Fecha de Invitación',
     'Solicitante',
     'Fecha de Viaje',
+    'Aprobado/Rechazado'
   ];
   ngOnInit() {
     this.expenseService.expenseListUpdated$.pipe(
       switchMap(() => this.expenseService.getExpenses()),
       map((expenses) =>
         expenses.map((expense) => ({
+
           ...expense,
           invitationTrip: expense.invitationTrip ? new Date(expense.invitationTrip) : null,
           registerDate: new Date(expense.registerDate),

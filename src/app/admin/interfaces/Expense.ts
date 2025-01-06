@@ -13,5 +13,13 @@ export interface ExpenseResponse {
   tripReason: string;
   invitationTrip: Date | null;
   dateTrip: Date | null;
-  requester: string
+  requester: string;
+  approvedBy: string;
 }
+
+export interface PendingExpense {
+  travelExpenseApprovalId: number,
+  status:String,
+  travelExpenseByUserResponse:ExpenseResponse
+}
+

@@ -2,7 +2,7 @@ import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { environment } from '@env/environment';
 import { BehaviorSubject, Observable, tap } from 'rxjs';
-import { Expense, ExpenseResponse } from '../interfaces/Expense';
+import { Expense, ExpenseResponse, PendingExpense } from '../interfaces/Expense';
 
 @Injectable({
   providedIn: 'root'
@@ -34,5 +34,21 @@ export class ExpenseService {
       'Authorization': `Bearer ${token}`
     };
     return this.http.get<ExpenseResponse[]>(`${this.apiUrl}/expenses/`, { headers });
+  }
+  getPendingExpenses(): Observable<PendingExpense[]>{
+    const token = localStorage.getItem('token')
+    const headers = {
+      'Authorization': `Bearer ${token}`
+    };
+
+    return this.http.get<PendingExpense[]>(`${this.apiUrl}/expenses/pending`, { headers });
+  }
+
+  updateExpenseStatus(id: number, status: string): Observable<PendingExpense>{
+    const token = localStorage.getItem('token')
+    const headers = {
+      'Authorization': `Bearer ${token}`
+    };
+    return this.http.put<PendingExpense>(`${this.apiUrl}/expenses/${id}`, { status }, { headers });
   }
 }

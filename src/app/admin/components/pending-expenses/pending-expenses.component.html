@@ -1,4 +1,3 @@
-<h1>Mis solicitudes de viaticos</h1>
 <table mat-table [dataSource]="dataSource" class="mat-elevation-z8">
 
   <!--- Note that these columns can be defined in any order.
@@ -56,11 +55,14 @@
     <th mat-header-cell *matHeaderCellDef> Fecha de Viaje </th>
     <td mat-cell *matCellDef="let element"> {{element.dateTrip ? (element.dateTrip | date:'dd/MM/yyyy') : 'No Aplica'}} </td>
   </ng-container>
-
-  <ng-container matColumnDef="Aprobado/Rechazado">
-    <th mat-header-cell *matHeaderCellDef> Aprobado/Rechazado por </th>
-    <td mat-cell *matCellDef="let element"> {{element.approvedBy ? element.approvedBy : 'Pendiente'}} </td>
+  <ng-container matColumnDef="Acciones">
+    <th mat-header-cell *matHeaderCellDef> Acciones </th>
+    <td mat-cell *matCellDef="let element">
+      <button mat-button color="primary" (click)="openConfirmationDialog('approve', element)">Aprobar</button>
+      <button mat-button color="warn" (click)="openConfirmationDialog('reject', element)">Rechazar</button>
+    </td>
   </ng-container>
+
 
   <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
   <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>

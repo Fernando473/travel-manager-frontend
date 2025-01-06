@@ -3,6 +3,7 @@ import { RouterModule, Routes } from '@angular/router';
 import { AdminLayoutComponent } from './layout/admin-layout/admin-layout.component';
 import { RequestLayoutComponent } from './layout/request-layout/request-layout.component';
 import { ApproveLayoutComponent } from './layout/approve-layout/approve-layout.component';
+import { WelcomeMessageComponent } from './components/welcome-message/welcome-message.component';
 
 const routes: Routes = [
   {
@@ -18,11 +19,14 @@ const routes: Routes = [
         component: ApproveLayoutComponent
       },
       {
+        path:'welcome',
+        component: WelcomeMessageComponent
+      },
+      {
         path: '',
-        redirectTo: 'create-expense',
+        redirectTo: 'welcome',
         pathMatch: 'full'
       }
-      // Aquí puedes agregar más rutas hijas
     ]
   }
 ];

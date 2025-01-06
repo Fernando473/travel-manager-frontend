@@ -5,13 +5,13 @@
   <mat-nav-list>
     <ng-container *ngIf="isExpenseRequester$ | async" >
       <a mat-list-item routerLink="/admin/dashboard/create-expense" routerLinkActive="active" class="menu-item">
-        <span>Crear Solicitud</span>
+        <span>Mis viaticos</span>
       </a>
     </ng-container>
 
     <ng-container *ngIf="isExpenseApprover$ | async" >
       <a mat-list-item routerLink="/admin/dashboard/approve-expense" routerLinkActive="active" class="menu-item">
-        <span>Aprobar Solicitud</span>
+        <span>Aprobar viaticos</span>
       </a>
     </ng-container>
     <mat-divider></mat-divider>

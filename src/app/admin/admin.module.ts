@@ -28,6 +28,8 @@ import { MatNativeDateModule } from '@angular/material/core';
 import { MatSlideToggleModule } from '@angular/material/slide-toggle';
 import { ExpenseListComponent } from './components/expense-list/expense-list.component';
 import { MatTableModule } from '@angular/material/table';
+import { WelcomeMessageComponent } from './components/welcome-message/welcome-message.component';
+import { PendingExpensesComponent } from './components/pending-expenses/pending-expenses.component';
 
 @NgModule({
   declarations: [
@@ -38,7 +40,9 @@ import { MatTableModule } from '@angular/material/table';
     ApproveRequestComponent,
     RequestLayoutComponent,
     ApproveLayoutComponent,
-    ExpenseListComponent
+    ExpenseListComponent,
+    WelcomeMessageComponent,
+    PendingExpensesComponent
   ],
   imports: [
     CommonModule,
